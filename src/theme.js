@@ -3,6 +3,7 @@ const theme = {
     surfaceGray: "#F8F8F8",
     textDefault: "#222222",
     borderDefault: "#DBDBDB",
+    decorativeBlue: "#74B3FF",
   },
 };
 
