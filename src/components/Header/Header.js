@@ -14,7 +14,7 @@ const Container = styled(BoldFont)({
 });
 
 const Header = () => {
-  return <Container>Absence Manager</Container>;
+  return <Container fontFamily={"Rajdhani"}>Absence Manager</Container>;
 };
 
 export default Header;

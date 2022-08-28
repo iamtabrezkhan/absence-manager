@@ -4,7 +4,7 @@ export const appSlice = createSlice({
   name: "app",
   initialState: {
     absences: [],
-    members: [],
+    membersById: {},
     totalAbsencesCount: 0,
   },
   reducers: {
@@ -23,7 +23,7 @@ export const appSlice = createSlice({
     setMembers: (state, action) => {
       return {
         ...state,
-        members: action.payload,
+        membersById: action.payload,
       };
     },
   },

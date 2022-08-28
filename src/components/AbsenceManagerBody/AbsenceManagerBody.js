@@ -7,11 +7,14 @@ const Container = styled.div({
   flex: 1,
   display: "flex",
   flexDirection: "column",
+  overflowY: "auto",
 });
 
 const InnerContainer = styled.div({
   width: "100%",
   flex: 1,
+  maxWidth: "768px",
+  margin: "0 auto",
 });
 
 const AbsenceManagerBody = () => {
