@@ -37,7 +37,7 @@ const getAbsencePeriod = ({ absence }) => {
 const Container = styled.div({
   display: " flex",
   background: (props) => props.theme.colors.white,
-  padding: "12px",
+  padding: "16px 12px",
   borderRadius: "0px 4px 4px 0px / 0px 4px 4px 0px",
   "&:hover": {
     transform: "translateX(-3px)",

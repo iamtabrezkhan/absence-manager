@@ -6,6 +6,8 @@ export const appSlice = createSlice({
     absences: [],
     membersById: {},
     totalAbsencesCount: 0,
+    selectedAbsenceType: "all",
+    currentPage: 1,
   },
   reducers: {
     setAbsences: (state, action) => {
@@ -26,9 +28,26 @@ export const appSlice = createSlice({
         membersById: action.payload,
       };
     },
+    setSelectedAbsenceType: (state, action) => {
+      return {
+        ...state,
+        selectedAbsenceType: action.payload,
+      };
+    },
+    setCurrentPage: (state, action) => {
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+    },
   },
 });
 
-export const { setAbsences, setMembers, setTotalAbsencesCount } =
-  appSlice.actions;
+export const {
+  setAbsences,
+  setMembers,
+  setTotalAbsencesCount,
+  setSelectedAbsenceType,
+  setCurrentPage,
+} = appSlice.actions;
 export default appSlice.reducer;

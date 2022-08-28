@@ -10,28 +10,38 @@ import {
 import AbsenceItem from "./components/AbsenceItem";
 import styled from "styled-components";
 import Loader from "../Loader";
+import { PAGE_LIMIT } from "../../config";
 
 const Container = styled.div({
   width: "100%",
   display: "flex",
   flexDirection: "column",
   rowGap: "8px",
-  padding: "16px 0",
+  paddingBottom: "16px",
 });
 
 const AbsencesList = () => {
   const [loading, setLoading] = useState(true);
   const absences = useSelector((state) => state?.app.absences);
   const membersById = useSelector((state) => state?.app.membersById);
+  const selectedAbsenceType = useSelector(
+    (state) => state.app.selectedAbsenceType
+  );
+  const currentPage = useSelector((state) => state.app.currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchAbsences();
-  }, []);
+  }, [selectedAbsenceType, currentPage]);
 
   const fetchAbsences = async () => {
+    setLoading(true);
     try {
-      const { data, totalCount } = await fetchAbsencesData();
+      const { data, totalCount } = await fetchAbsencesData({
+        type: selectedAbsenceType,
+        page: currentPage,
+        limit: PAGE_LIMIT,
+      });
       const membersList = await fetchMembersData();
       const membersGroupedById = membersList.reduce((result, member) => {
         return { ...result, [member.userId]: member };
