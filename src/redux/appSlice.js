@@ -8,6 +8,7 @@ export const appSlice = createSlice({
     totalAbsencesCount: 0,
     selectedAbsenceType: "all",
     currentPage: 1,
+    selectedPeriodRange: null,
   },
   reducers: {
     setAbsences: (state, action) => {
@@ -40,6 +41,12 @@ export const appSlice = createSlice({
         currentPage: action.payload,
       };
     },
+    setSelectedPeriodRange: (state, action) => {
+      return {
+        ...state,
+        selectedPeriodRange: action.payload,
+      };
+    },
   },
 });
 
@@ -49,5 +56,6 @@ export const {
   setTotalAbsencesCount,
   setSelectedAbsenceType,
   setCurrentPage,
+  setSelectedPeriodRange,
 } = appSlice.actions;
 export default appSlice.reducer;

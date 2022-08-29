@@ -4,8 +4,13 @@ import Select from "react-select";
 import MediumFont from "../MediumFont";
 import Paginator from "../Paginator";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedAbsenceType, setCurrentPage } from "../../redux/appSlice";
+import {
+  setSelectedAbsenceType,
+  setCurrentPage,
+  setSelectedPeriodRange,
+} from "../../redux/appSlice";
 import { PAGE_LIMIT } from "../../config";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 
 const absenceTypeOptions = [
   { value: "all", label: "All" },
@@ -57,11 +62,38 @@ const TotalContainer = styled.div({
   columnGap: "4px",
 });
 
+const StyledDateRangePicker = styled(DateRangePicker)({
+  background: (props) => props.theme.colors.white,
+  border: (props) => `1px solid ${props.theme.colors.borderHover}`,
+  ".react-daterange-picker__wrapper": {
+    border: "none",
+  },
+  padding: "4px",
+  borderRadius: "4px",
+  "input:focus": {
+    outline: "none",
+  },
+  ".react-daterange-picker__calendar .react-calendar": {
+    border: (props) => `1px solid ${props.theme.colors.borderHover}`,
+    borderRadius: "4px",
+  },
+  ".react-daterange-picker__calendar": {
+    width: "330px",
+  },
+  ".react-calendar__tile--hasActive": {
+    background: (props) => props.theme.colors.decorativeBlueDark,
+    color: (props) => props.theme.colors.white,
+  },
+});
+
 const FilterHeader = () => {
   const selectedAbsenceType = useSelector(
     (state) => state.app.selectedAbsenceType
   );
   const totalCount = useSelector((state) => state.app.totalAbsencesCount);
+  const selectedPeriodRange = useSelector(
+    (state) => state.app.selectedPeriodRange
+  );
   const selectedAbsenceOption = absenceTypeOptions.find(
     (item) => item.value === selectedAbsenceType
   );
@@ -71,6 +103,11 @@ const FilterHeader = () => {
     const { value } = e;
     dispatch(setSelectedAbsenceType(value));
     dispatch(setCurrentPage(1));
+  };
+
+  const handleDateRangeChange = (value) => {
+    dispatch(setCurrentPage(1));
+    dispatch(setSelectedPeriodRange(value));
   };
 
   return (
@@ -87,6 +124,13 @@ const FilterHeader = () => {
             components={{
               IndicatorsContainer: () => null,
             }}
+          />
+        </DropdownContainer>
+        <DropdownContainer>
+          <Label>Period: </Label>
+          <StyledDateRangePicker
+            onChange={handleDateRangeChange}
+            value={selectedPeriodRange}
           />
         </DropdownContainer>
       </LeftContainer>

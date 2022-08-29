@@ -42,12 +42,15 @@ const AbsencesList = () => {
   const selectedAbsenceType = useSelector(
     (state) => state.app.selectedAbsenceType
   );
+  const selectedPeriodRange = useSelector(
+    (state) => state.app.selectedPeriodRange
+  );
   const currentPage = useSelector((state) => state.app.currentPage);
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchAbsences();
-  }, [selectedAbsenceType, currentPage]);
+  }, [selectedAbsenceType, currentPage, selectedPeriodRange]);
 
   const fetchAbsences = async () => {
     setLoading(true);
@@ -56,6 +59,7 @@ const AbsencesList = () => {
         type: selectedAbsenceType,
         page: currentPage,
         limit: PAGE_LIMIT,
+        periodRange: selectedPeriodRange,
       });
       dispatch(setAbsences(data));
       dispatch(setTotalAbsencesCount(totalCount));

@@ -14,6 +14,7 @@ const theme = {
     white: "#ffffff",
     black: "#000000",
     textSubtle: "#717171",
+    borderHover: "#CCCCCC",
   },
   fonts: {
     regular: {
