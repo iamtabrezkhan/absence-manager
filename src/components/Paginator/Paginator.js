@@ -27,15 +27,13 @@ const StyledButton = styled(SemiBoldFont)({
       : props.theme.colors.decorativeBlue,
   color: (props) => props.theme.colors.white,
   border: "none",
-  cursor: (props) => !props.disabled && "pointer",
+  cursor: "pointer",
   "&:hover": {
-    background: (props) =>
-      !props.disabled && props.theme.colors.decorativeBlueDark,
+    background: (props) => props.theme.colors.decorativeBlueDark,
   },
   fontSize: "1.4rem",
   padding: "4px 8px",
   borderRadius: "2px",
-  pointerEvent: (props) => props.disabled && "none",
 });
 
 const usePagination = ({
