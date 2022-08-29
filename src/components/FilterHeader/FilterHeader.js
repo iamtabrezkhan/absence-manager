@@ -29,7 +29,11 @@ const LeftContainer = styled.div({
   alignItems: "center",
 });
 
-const RightContainer = styled.div({});
+const RightContainer = styled.div({
+  display: "flex",
+  alignItems: "center",
+  columnGap: "8px",
+});
 
 const DropdownContainer = styled.div({
   fontSize: "1.4rem",
@@ -44,6 +48,13 @@ const Dropdown = styled(Select)({
 
 const Label = styled(MediumFont)({
   width: "auto",
+});
+
+const TotalContainer = styled.div({
+  fontSize: "1.4rem",
+  display: "flex",
+  alignItems: "center",
+  columnGap: "4px",
 });
 
 const FilterHeader = () => {
@@ -80,6 +91,10 @@ const FilterHeader = () => {
         </DropdownContainer>
       </LeftContainer>
       <RightContainer>
+        <TotalContainer>
+          <Label>Total absences:</Label>
+          <div>{totalCount}</div>
+        </TotalContainer>
         <Paginator totalCount={totalCount} pageSize={PAGE_LIMIT} />
       </RightContainer>
     </Container>

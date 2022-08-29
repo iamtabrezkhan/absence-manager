@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { fetchMembersData } from "../../http/members";
+import { setMembers } from "../../redux/appSlice";
 import AbsencesList from "../AbsencesList";
+import Loader from "../Loader";
 
 const Container = styled.div({
   width: "100%",
@@ -18,6 +22,31 @@ const InnerContainer = styled.div({
 });
 
 const AbsenceManagerBody = () => {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    initMembersData();
+  }, []);
+
+  const initMembersData = async () => {
+    try {
+      const membersList = await fetchMembersData();
+      const membersGroupedById = membersList.reduce((result, member) => {
+        return { ...result, [member.userId]: member };
+      }, {});
+      dispatch(setMembers(membersGroupedById));
+    } catch (error) {
+      dispatch(setMembers({}));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <Container>
       <InnerContainer>
