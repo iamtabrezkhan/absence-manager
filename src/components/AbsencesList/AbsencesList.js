@@ -5,7 +5,7 @@ import { setAbsences, setTotalAbsencesCount } from "../../redux/appSlice";
 import AbsenceItem from "./components/AbsenceItem";
 import styled from "styled-components";
 import Loader from "../Loader";
-import { PAGE_LIMIT } from "../../config";
+import { PAGE_SIZE } from "../../config";
 import EmptyFileIcon from "../../svgcomponents/EmptyFileIcon";
 import BrokenFileIcon from "../../svgcomponents/BrokenFileIcon";
 import SemiBoldFont from "../SemiBoldFont";
@@ -54,11 +54,12 @@ const AbsencesList = () => {
 
   const fetchAbsences = async () => {
     setLoading(true);
+    setError(null);
     try {
       const { data, totalCount } = await fetchAbsencesData({
         type: selectedAbsenceType,
         page: currentPage,
-        limit: PAGE_LIMIT,
+        limit: PAGE_SIZE,
         periodRange: selectedPeriodRange,
       });
       dispatch(setAbsences(data));

@@ -119,51 +119,47 @@ const Paginator = (props) => {
     dispatch(setCurrentPage(nextPage));
   };
 
-  const onClickButton = (nextPage) => {
+  const onClickNumberButton = (nextPage) => {
     dispatch(setCurrentPage(nextPage));
   };
 
-  const getPageButton = () => {
+  const getPageButtons = () => {
     if (pageButtons.length <= 1) {
       return null;
     }
     return pageButtons.map((button, index) => {
       const isActive = button === currentPage;
-      if (button === "LEFT_PAGE") {
-        return (
-          <StyledButton
-            key={index}
-            isActive={isActive}
-            onClick={() => onClickNextPrevButton({ direction: "PREV" })}
-          >
-            &laquo;
-          </StyledButton>
-        );
-      }
-      if (button === "RIGHT_PAGE") {
-        return (
-          <StyledButton
-            key={index}
-            isActive={isActive}
-            onClick={() => onClickNextPrevButton({ direction: "NEXT" })}
-          >
-            &raquo;
-          </StyledButton>
-        );
+      let buttonLabel = button;
+      let onClickButton = () => onClickNumberButton(button);
+      switch (button) {
+        case "LEFT_PAGE": {
+          buttonLabel = "&laquo;";
+          onClickButton = () => onClickNextPrevButton({ direction: "PREV" });
+          break;
+        }
+        case "RIGHT_PAGE": {
+          buttonLabel = "&raquo;";
+          onClickButton = () => onClickNextPrevButton({ direction: "NEXT" });
+          break;
+        }
+        default: {
+          break;
+        }
       }
       return (
         <StyledButton
           key={index}
           isActive={isActive}
-          onClick={() => onClickButton(button)}
-        >
-          {button}
-        </StyledButton>
+          onClick={onClickButton}
+          dangerouslySetInnerHTML={{
+            __html: buttonLabel,
+          }}
+        ></StyledButton>
       );
     });
   };
 
-  return <Container>{getPageButton()}</Container>;
+  return <Container>{getPageButtons()}</Container>;
 };
 
 export default Paginator;

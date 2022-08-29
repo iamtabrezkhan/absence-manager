@@ -3,20 +3,14 @@ import styled from "styled-components";
 import Select from "react-select";
 import MediumFont from "../MediumFont";
 import Paginator from "../Paginator";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setSelectedAbsenceType,
   setCurrentPage,
   setSelectedPeriodRange,
 } from "../../redux/appSlice";
-import { PAGE_LIMIT } from "../../config";
-import DateRangePicker from "@wojtekmaj/react-daterange-picker";
-
-const absenceTypeOptions = [
-  { value: "all", label: "All" },
-  { value: "vacation", label: "Vacation" },
-  { value: "sickness", label: "Sickness" },
-];
+import { PAGE_SIZE, absenceTypeOptions } from "../../config";
 
 const Container = styled.div({
   display: "flex",
@@ -139,7 +133,7 @@ const FilterHeader = () => {
           <Label>Total absences:</Label>
           <div>{totalCount}</div>
         </TotalContainer>
-        <Paginator totalCount={totalCount} pageSize={PAGE_LIMIT} />
+        <Paginator totalCount={totalCount} pageSize={PAGE_SIZE} />
       </RightContainer>
     </Container>
   );

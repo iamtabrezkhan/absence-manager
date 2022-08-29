@@ -26,7 +26,7 @@ const getAbsenceStatus = ({ absence }) => {
   return "Requested";
 };
 
-const getAbsencePeriod = ({ absence }) => {
+const getAbsencePeriodDateString = ({ absence }) => {
   const startDate = new Date(absence.startDate);
   const formattedStartDate = format(startDate, "do MMM, yy");
   const endDate = new Date(absence.endDate);
@@ -130,7 +130,9 @@ const AbsenceItem = (props) => {
         )}
         <BottomContainer>
           <AnsencesType>{absence.type}</AnsencesType>
-          <PeriodContainer>{getAbsencePeriod({ absence })}</PeriodContainer>
+          <PeriodContainer>
+            {getAbsencePeriodDateString({ absence })}
+          </PeriodContainer>
         </BottomContainer>
       </InfoContainer>
     </Container>

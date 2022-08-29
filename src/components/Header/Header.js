@@ -4,9 +4,9 @@ import BoldFont from "../BoldFont";
 
 const Container = styled(BoldFont)({
   display: "flex",
-  alignItems: "center",
   width: "100%",
   height: "64px",
+  alignItems: "center",
   justifyContent: "center",
   fontSize: "3rem",
   color: (props) => props.theme.colors.textDefault,

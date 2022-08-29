@@ -15,7 +15,8 @@ export const fetchAbsencesData = async ({
     const formattedPeriodRange = periodRange.map((date) =>
       format(date, "yyyy-MM-dd")
     );
-    url += `&startDate_gte=${formattedPeriodRange[0]}&startDate_lte=${formattedPeriodRange[1]}&endDate_gte=${formattedPeriodRange[0]}&endDate_lte=${formattedPeriodRange[1]}`;
+    const [startRange, endRange] = formattedPeriodRange;
+    url += `&startDate_gte=${startRange}&startDate_lte=${endRange}&endDate_gte=${startRange}&endDate_lte=${endRange}`;
   }
   return fetch(url).then(async (res) => {
     const data = await res.json();

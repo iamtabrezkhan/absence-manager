@@ -26,10 +26,10 @@ const AbsenceManagerBody = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    initMembersData();
+    initializeMembersData();
   }, []);
 
-  const initMembersData = async () => {
+  const initializeMembersData = async () => {
     try {
       const membersList = await fetchMembersData();
       const membersGroupedById = membersList.reduce((result, member) => {
