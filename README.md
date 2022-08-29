@@ -1,6 +1,7 @@
 ## Absence Manager Client
 
-This is the client application built using [create-react-app](https://create-react-app.dev/).
+This is the client application built using [create-react-app](https://create-react-app.dev).
+Hosted URL - [https://absence-manager-client.herokuapp.com](https://absence-manager-client.herokuapp.com)
 
 ### Features implemented:
 
